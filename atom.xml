@@ -1,105 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>The World According To Chris</title>
-  <meta name="author" content="Christoph Weiss">
-
-  
-  <meta name="description" content="FFmpeg is quite a powerful tool for handling video and audio files and streams. During work I came across the need to link the FFmpeg libraries &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://cristobaldobranco.github.io/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="The World According To Chris" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-51960793-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">The World According To Chris</a></h1>
-  
-    <h2>Dev Blog, Creative Escape, Drunk Ramblings &#8230; You Name it!</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="https://www.google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="cristobaldobranco.github.io">
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[The World According To Chris]]></title>
+  <link href="http://cristobaldobranco.github.io/atom.xml" rel="self"/>
+  <link href="http://cristobaldobranco.github.io/"/>
+  <updated>2015-01-20T11:41:59+01:00</updated>
+  <id>http://cristobaldobranco.github.io/</id>
+  <author>
+    <name><![CDATA[Christoph Weiss]]></name>
     
-      <h1 class="entry-title"><a href="/blog/2015/01/20/compiling-ffmpeg-with-windows-tools/">Compiling FFmpeg With Windows Tools</a></h1>
-    
-    
-      <p class="meta">
-        
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
-
-
-
-<time class='entry-date' datetime='2015-01-20T11:34:12+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>11:34 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>FFmpeg is quite a powerful tool for handling video and audio files and streams. During work I came across the need to link the FFmpeg libraries statically with a Microsoft Visual Studio project. While there are current <a href="http://ffmpeg.zeranoe.com/builds/">pre-built versions</a> of the developer libraries for dynamic linking (i.e. DLLs), I did not come across the static libs. So I figured, I&rsquo;ll have to compile them myself. We required the libraries for 32bit and 64bit architectures. After experimenting a lot with MinGW and its GCC variant and trying to link the outputs to our Visual Studio project, I gave up on this method as I could not get the libraries to link with x86 and x64 configurations.</p>
+  
+  <entry>
+    <title type="html"><![CDATA[Compiling FFmpeg With Windows Tools]]></title>
+    <link href="http://cristobaldobranco.github.io/blog/2015/01/20/compiling-ffmpeg-with-windows-tools/"/>
+    <updated>2015-01-20T11:34:12+01:00</updated>
+    <id>http://cristobaldobranco.github.io/blog/2015/01/20/compiling-ffmpeg-with-windows-tools</id>
+    <content type="html"><![CDATA[<p>FFmpeg is quite a powerful tool for handling video and audio files and streams. During work I came across the need to link the FFmpeg libraries statically with a Microsoft Visual Studio project. While there are current <a href="http://ffmpeg.zeranoe.com/builds/">pre-built versions</a> of the developer libraries for dynamic linking (i.e. DLLs), I did not come across the static libs. So I figured, I&rsquo;ll have to compile them myself. We required the libraries for 32bit and 64bit architectures. After experimenting a lot with MinGW and its GCC variant and trying to link the outputs to our Visual Studio project, I gave up on this method as I could not get the libraries to link with x86 and x64 configurations.</p>
 
 <p>Basically this is what I did to get the libraries to work. The configure script provides a &ndash;toolchain=msvc switch which will tell make to use of the Windows compiler suite but this needs a few prerequisites:</p>
 
@@ -232,81 +151,7 @@
 <p>Congratulations, you are now the proud owner of your own FFmpeg tools compiled without any compatibility layers. All system accesses directly call the Windows runtime.</p>
 
 <p>You will find several .a files in the subfolders of the source (e.g. libavcodec/libavcodec.a). These are the developer libraries that although they have the extension .a are compatible to (or actually the same format as) Windows .lib files. They can easily be linked with any Microsoft Visual Studio project that needs to interact with  FFmpeg. Finding the necessary include files for your application might get a little trickier but you should be able to extract a set of header files that your program needs.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2015/01/20/compiling-ffmpeg-with-windows-tools/">Compiling FFmpeg With Windows Tools</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Christoph Weiss -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'httpcristobaldobrancogithubio';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>

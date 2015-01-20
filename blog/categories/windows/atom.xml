@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Windows | The World According To Chris]]></title>
+  <link href="http://cristobaldobranco.github.io/blog/categories/windows/atom.xml" rel="self"/>
+  <link href="http://cristobaldobranco.github.io/"/>
+  <updated>2015-01-20T11:41:59+01:00</updated>
+  <id>http://cristobaldobranco.github.io/</id>
+  <author>
+    <name><![CDATA[Christoph Weiss]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Compiling FFmpeg With Windows Tools]]></title>
+    <link href="http://cristobaldobranco.github.io/blog/2015/01/20/compiling-ffmpeg-with-windows-tools/"/>
+    <updated>2015-01-20T11:34:12+01:00</updated>
+    <id>http://cristobaldobranco.github.io/blog/2015/01/20/compiling-ffmpeg-with-windows-tools</id>
+    <content type="html"><![CDATA[<p>FFmpeg is quite a powerful tool for handling video and audio files and streams. During work I came across the need to link the FFmpeg libraries statically with a Microsoft Visual Studio project. While there are current <a href="http://ffmpeg.zeranoe.com/builds/">pre-built versions</a> of the developer libraries for dynamic linking (i.e. DLLs), I did not come across the static libs. So I figured, I&rsquo;ll have to compile them myself. We required the libraries for 32bit and 64bit architectures. After experimenting a lot with MinGW and its GCC variant and trying to link the outputs to our Visual Studio project, I gave up on this method as I could not get the libraries to link with x86 and x64 configurations.</p>
+
+<p>Basically this is what I did to get the libraries to work. The configure script provides a &ndash;toolchain=msvc switch which will tell make to use of the Windows compiler suite but this needs a few prerequisites:</p>
+
+<ul>
+<li>Git to get the latest version of FFmpeg</li>
+<li>MinGW to be able to process makefiles</li>
+<li>Windows compiler suite (as I only had Visual Studio 2008, which is too old because it does not support the compiler switch /Fi, I had to use the Windows SDK 7.1)</li>
+<li>C99-to-C89 wrapper to support the C99 standard</li>
+<li>YASM to process the assembly files of FFmpeg</li>
+</ul>
+
+
+<h2>Getting the Prerequisites</h2>
+
+<ul>
+<li>Download <a href="http://git-scm.com/downloads">Git for Windows</a></li>
+<li>Download <a href="http://www.microsoft.com/en-us/download/details.aspx?id=8279">Windows SDK 7.1</a></li>
+<li>Download <a href="http://sourceforge.net/projects/mingw/files/latest/download?source=files">MinGW-get utitlity</a></li>
+<li>Download <a href="https://github.com/libav/c99-to-c89/downloads">C99-to-C89 Converter &amp; Wrapper</a></li>
+<li>Download <a href="http://yasm.tortall.net/Download.html">Yasm</a>, get the 64bit version for general use</li>
+</ul>
+
+
+<h2>Setting Up the Environment</h2>
+
+<ul>
+<li>Install it and put the bin folder into your PATH enviroment variable.</li>
+<li>Install Windows SDK</li>
+<li>Install MinGW-get utility, set PATH to point to it and in a command shell run:</li>
+</ul>
+
+
+<pre><code class="sh">mingw-get install msys
+mingw-get install msys-coreutils
+</code></pre>
+
+<ul>
+<li>Rename Yasm binary to yasm.exe and copy into the path of the compilers of the Windows SDK (for me this was C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin and C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\x64). Be sure to place it in both the folders if you want to compile for 32bit and 64bit architectures.</li>
+<li>Copy c99conv.exe and c99wrap.exe from the C99-to-C89 Converter archive into the path of the compilers of the Windows SDK. Be sure to place it in both the folders if you want to compile for 32bit and 64bit architectures.</li>
+</ul>
+
+
+<h2>Get the FFmpeg Source</h2>
+
+<ul>
+<li>Go to the drive location where you want to compile FFmpeg and in a command shell execute. This might take a little while depending on your connection, grab a coffee.</li>
+</ul>
+
+
+<pre><code class="sh">git clone git://source.ffmpeg.org/ffmpeg.git ffmpeg
+</code></pre>
+
+<h2>Compiling the Libraries</h2>
+
+<ul>
+<li>Open cmd.exe and change to the Windows SDK v7.1 installation folder</li>
+<li>Run either for x86
+<code>sh
+SetEnv.cmd /x86 Release
+</code>
+or for x64
+<code>sh
+SetEnv.cmd /x64 Release
+</code></li>
+<li>Change to the MinGW/Msys folder and run msys.bat</li>
+</ul>
+
+
+<p>These steps set up the Windows path variables to point to the correct Windows compiler (+Yasm+C99 converter that you copied there) and then start Msys (a bash shell for MinGW) with these paths</p>
+
+<ul>
+<li><p>In Msys run
+<code>sh
+which link.exe
+</code>
+If link.exe points to /bin/link.exe, your installation cannot see the Microsoft Linker. Run the following in Msys:
+<code>sh
+mv /bin/link.exe /bin/link.mingw.exe
+</code></p></li>
+<li><p>Change to the folder you checked out FFmpeg into and run for x86 compilation
+<code>sh
+./configure --toolchain=msvc --arch=x86
+make clean &amp;&amp; make
+</code>
+or
+<code>sh
+./configure --toolchain=msvc --arch=x86_64
+make clean &amp;&amp; make
+</code></p></li>
+<li><p>This will take a longer while, go for lunch</p></li>
+</ul>
+
+
+<h2>Working with the Libraries</h2>
+
+<p>Congratulations, you are now the proud owner of your own FFmpeg tools compiled without any compatibility layers. All system accesses directly call the Windows runtime.</p>
+
+<p>You will find several .a files in the subfolders of the source (e.g. libavcodec/libavcodec.a). These are the developer libraries that although they have the extension .a are compatible to (or actually the same format as) Windows .lib files. They can easily be linked with any Microsoft Visual Studio project that needs to interact with  FFmpeg. Finding the necessary include files for your application might get a little trickier but you should be able to extract a set of header files that your program needs.</p>
+]]></content>
+  </entry>
+  
+</feed>
